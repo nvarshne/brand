@@ -30,3 +30,13 @@ Necessary to change our database in any way.
 then edit the change function in db/migrate/XXXXXXXXX_new_mig.rb to do what is necessary 
 
 `$ rails db:migrate` (formerly $ bundle exec rake db:migrate) 
+
+
+* Heroku
+need 
+```
+$ heroku rake db:migrate
+```
+```
+$ heroku db:push
+```

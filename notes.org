@@ -1,0 +1,32 @@
+* Rails Generators & Functions
+$ rails generate controller StaticPages home help
+$ rails generate model User name:string email:string
+
+also, `$ bundle` is short for `$ bundle install`
+rake db:create
+
+postgres user/pass is in config/database.yml
+
+
+
+
+* Testing
+rails test:models
+rails test:integration
+
+
+* Ruby Notes
+.inspect method on objects returns a string representation
+
+%w[foo bar baz] is used to convert that innard into an array of strings
+
+String interpolation: "some text #{varToInterpolate} some text"
+
+* Migrations
+Necessary to change our database in any way.
+
+`$ rails generate migrations new_mig`
+
+then edit the change function in db/migrate/XXXXXXXXX_new_mig.rb to do what is necessary 
+
+`$ rails db:migrate` (formerly $ bundle exec rake db:migrate) 

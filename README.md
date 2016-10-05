@@ -1,37 +1,17 @@
-# ad-market
-# TODO
+# Ruby Version
+`2.3.1`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-## newdev setup, mac:
-
-### Install Necessary Tools
-`homebrew, rbenv, ruby, rails, postgres`
+# System Dependencies (w/ installation on Mac)
+`rbenv, ruby, rails, postgres, git, homebrew`
 
 Set up ssh keys in your git:
-https://help.github.com/articles/generating-an-ssh-key/
+```
+$ open https://help.github.com/articles/generating-an-ssh-key/
+```
 
-install homebrew:
+install homebrew to install rbenv, then use rbenv to install/manage ruby:
 ```
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-install rbenv, use rbenv to install ruby:
-```
 $ brew install rbenv ruby-build
 $ echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
 $ source ~/.bash_profile
@@ -60,51 +40,78 @@ check rails install:
 $ rails -v
 ```
 
-Install PostgreSQL
+Install PostgreSQL 9.6.0
 ```
-$ brew install postgresql
+$ open http://postgresapp.com/
 ```
 
-Start Postgres at login (and launch it now)
+Configure to Start Postgres at login (and launch it now)
 ```
 $ ln -sfv /usr/local/opt/postgresql/*plist ~/Library/LaunchAgents
 $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 ```
 
-### Start the App
+# Configuration
 
-Clone the repo, cd into it.
+Open the repo.
 
 Install the needed gems:
 ```
-$ bundle install --without production
+$ bundle install
 ```
 
+# Database Creation
+
+Edit `config/database.yml` to be whatever username & password you want. Maybe choose `colab`
+
+Create the database
+```
+$ rails db:create
+```
+
+If you need a fresh start, first run this:
+```
+$ rails db:drop
+```
+
+# Database Initialization
 Migrate the database:
 ```
 $ rails db:migrate
 ```
 
-Run the test suite to verify that everything is working correctly:
+You can now run the app locally:
+```
+$ rails server
+```
+
+# Running Tests
+Full test suite
 ```
 $ rails test
 ```
 
-If the test suite passes, you'll be ready to run the app in a local server:
+Just models, just integration
 ```
-$ rails server
+$ rails test:models
+$ rails test:integration
 ```
 
-
-
-
-## Reference: app creation with pg connection
+Just one specific test:
 ```
-$ rails new myapp -d postgresql
+$ rails test test/integration/users_login_test.rb --name test_login_with_valid_information,_then_logout
 ```
-then change `config/database.yml` to be your osx name. Or just whatever user/pass you want
 
+# Services
+
+#### TODO
+job queues, caching, sharding...
+
+# Deployment Instructions
+
+Make sure all tests pass, then push to heroku:
+
+Push to production:
 ```
-$ rake db:create
-$ rails server
+$ git push heroku master
 ```

@@ -10,7 +10,7 @@ gem 'coffee-rails', '4.2.1'
 gem 'jquery-rails', '4.1.1'
 gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.4.1'
-gem 'bcrypt',       '3.1.11'
+gem 'bcrypt',       '3.1.11' # used to hash pw (via has_secure_password)
 gem 'rb-readline' # used for rails console!
 gem 'pry' # used for jump_to_definition!
 

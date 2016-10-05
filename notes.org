@@ -34,5 +34,5 @@ $ heroku run console --sandbox
 $ heroku apps:info
 
 $ heroku pg:reset DATABASE
-
+$ heroku pg:psql --app colab0 DATABASE
 ```

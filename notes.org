@@ -43,6 +43,7 @@ $ heroku run rails db:migrate
 $ heroku run console --sandbox
 $ heroku apps:info
 
-$ heroku db:push   #?
+$ heroku pg:reset DATABASE
+
 ```
 

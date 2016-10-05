@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @base_title = "Ad-Market"
+    @base_title = "CoLab"
   end
 
   test "should get home" do

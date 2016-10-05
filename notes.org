@@ -1,6 +1,8 @@
 * Rails Generators & Functions
 $ rails generate controller StaticPages home help
 $ rails generate model User name:string email:string
+$ rails generate integration_test users_signup
+
 
 also, `$ bundle` is short for `$ bundle install`
 rake db:create
@@ -25,7 +27,7 @@ String interpolation: "some text #{varToInterpolate} some text"
 * Migrations
 Necessary to change our database in any way.
 
-`$ rails generate migrations new_mig`
+`$ rails generate migrations new_mig some_field:string`
 
 then edit the change function in db/migrate/XXXXXXXXX_new_mig.rb to do what is necessary 
 
@@ -33,10 +35,11 @@ then edit the change function in db/migrate/XXXXXXXXX_new_mig.rb to do what is n
 
 
 * Heroku
-need 
 ```
-$ heroku rake db:migrate
+$ heroku run rails db:migrate
+$ heroku run console --sandbox
+$ heroku apps:info
+
+$ heroku db:push   #?
 ```
-```
-$ heroku db:push
-```
+

@@ -1,23 +1,21 @@
 source 'https://rubygems.org'
 ruby "2.3.1"
 
-gem 'rails',        '5.0.0.1'
+gem 'rails',         '5.0.0.1'
 gem 'bootstrap-sass','3.3.6'
-gem 'puma',         '3.4.0'
-gem 'sass-rails',   '5.0.6'
-gem 'uglifier',     '3.0.0'
-gem 'coffee-rails', '4.2.1'
-gem 'jquery-rails', '4.1.1'
-gem 'turbolinks',   '5.0.1'
-gem 'jbuilder',     '2.4.1'
-gem 'bcrypt',       '3.1.11' # used to hash pw (via has_secure_password)
-gem 'rb-readline' # used for rails console!
-gem 'pry' # used for jump_to_definition!
-gem 'pg', '0.18.4'
-
+gem 'puma',          '3.4.0'
+gem 'sass-rails',    '5.0.6'
+gem 'uglifier',      '3.0.0'
+gem 'coffee-rails',  '4.2.1'
+gem 'jquery-rails',  '4.1.1'
+gem 'turbolinks',    '5.0.1'
+gem 'jbuilder',      '2.4.1'
+gem 'bcrypt',        '3.1.11' # for hashing things
+gem 'rb-readline'             # for rails console
+gem 'pry'                     # for jump_to_definition
+gem 'pg',            '0.18.4'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.11'
   gem 'byebug',  '9.0.0', platform: :mri
 end
 
@@ -33,9 +31,6 @@ group :test do
   gem 'minitest-reporters',       '1.1.9'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
-end
-
-group :production do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

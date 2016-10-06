@@ -119,3 +119,11 @@ Push to production:
 ```
 $ git push heroku master
 ```
+
+If commit includes migrations do this instead:
+```
+$ heroku maintenance:on
+$ git push heroku
+$ heroku run rake db:migrate
+$ heroku maintenance:off
+```

@@ -1,3 +1,5 @@
+This is the first time I wrote anything in Ruby, so I have a bunch of funny comments in the app.
+
 # Ruby Version
 `2.3.1`
 
@@ -45,10 +47,9 @@ Install PostgreSQL 9.6.0
 $ open http://postgresapp.com/
 ```
 
-Configure to Start Postgres at login (and launch it now)
+Also, add this to `.bash_profile` to get a `psql` command and have pg_config in PATH!:
 ```
-$ ln -sfv /usr/local/opt/postgresql/*plist ~/Library/LaunchAgents
-$ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
 ```
 
 # Configuration
@@ -62,14 +63,17 @@ $ bundle install
 
 # Database Creation
 
-Edit `config/database.yml` to be whatever username & password you want. Maybe choose `colab`
+Check that Postgres is installed and works (and is 9.6.0)
+```
+$ psql --version
+```
 
-Create the database
+Create the dev database
 ```
 $ rails db:create
 ```
 
-If you need a fresh start, first run this:
+If you ever want a fresh start, just run this:
 ```
 $ rails db:drop
 ```

@@ -13,6 +13,8 @@ gem 'jbuilder',     '2.4.1'
 gem 'bcrypt',       '3.1.11' # used to hash pw (via has_secure_password)
 gem 'rb-readline' # used for rails console!
 gem 'pry' # used for jump_to_definition!
+gem 'pg', '0.18.4'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'
@@ -34,7 +36,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '0.18.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

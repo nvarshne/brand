@@ -95,14 +95,10 @@ Full test suite
 $ rails test
 ```
 
-Just models, just integration
+Specific test like so:
 ```
 $ rails test:models
 $ rails test:integration
-```
-
-Just one specific test:
-```
 $ rails test test/integration/users_login_test.rb --name test_login_with_valid_information,_then_logout
 ```
 

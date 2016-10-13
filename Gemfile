@@ -1,22 +1,25 @@
 source 'https://rubygems.org'
 ruby "2.3.1"
 
-gem 'rails',         '5.0.0.1'
-gem 'bootstrap-sass','3.3.6'
-gem 'puma',          '3.4.0'
-gem 'sass-rails',    '5.0.6'
-gem 'uglifier',      '3.0.0'
-gem 'coffee-rails',  '4.2.1'
-gem 'jquery-rails',  '4.1.1'
-gem 'turbolinks',    '5.0.1'
-gem 'jbuilder',      '2.4.1'
-gem 'bcrypt',        '3.1.11' # for hashing things
-gem 'rb-readline'             # for rails console
-gem 'pry'                     # for jump_to_definition
-gem 'pg',            '0.18.4'
+gem 'rails',                   '5.0.0.1'
+gem 'bootstrap-sass',          '3.3.6'
+gem 'puma',                    '3.4.0'
+gem 'sass-rails',              '5.0.6'
+gem 'uglifier',                '3.0.0'
+gem 'coffee-rails',            '4.2.1'
+gem 'jquery-rails',            '4.1.1'
+gem 'turbolinks',              '5.0.1'
+gem 'jbuilder',                '2.4.1'
+gem 'pg',                      '0.18.4' # Database!
+gem 'bcrypt',                  '3.1.11' # hashing things
+gem 'rb-readline'                       # rails console
+gem 'pry'                               # jump_to_definition
+gem 'faker',                   '1.6.6'  # faking seed data
+gem 'will_paginate',           '3.1.0'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 group :development, :test do
-  gem 'byebug',  '9.0.0', platform: :mri
+  gem 'byebug',  '9.0.0', platform: :mri #'debugger'
 end
 
 group :development do

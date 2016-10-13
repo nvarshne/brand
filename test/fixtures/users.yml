@@ -3,3 +3,7 @@ james:
   email: jmat@matanle.gov
   password_digest: <%= User.digest('password') %>
 
+brody:
+  name: Brody Matanle
+  email: bmatanle@gmail.com
+  password_digest: <%= User.digest('password') %>

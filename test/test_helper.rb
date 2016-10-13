@@ -21,7 +21,6 @@ end
 
 class ActionDispatch::IntegrationTest
 
-  # notice: same method name for integration and unit test. This one is from the client, the other from the server
   def log_in_as(user, password: 'password', remember_me: '1')
     post login_path, params: { session: { email: user.email,
                                           password: password,

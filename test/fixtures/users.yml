@@ -2,6 +2,7 @@ james:
   name: James Matanle
   email: jmat@matanle.gov
   password_digest: <%= User.digest('password') %>
+  admin: true
 
 brody:
   name: Brody Matanle

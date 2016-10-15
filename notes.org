@@ -36,3 +36,10 @@ $ heroku apps:info
 $ heroku pg:reset DATABASE
 $ heroku pg:psql --app colab0 DATABASE
 ```
+
+* Environment Variables
+can look at them through heroku CLI
+```
+$ heroku config:get SENDGRID_USERNAME
+$ heroku config:get SENDGRID_PASSWORD
+```

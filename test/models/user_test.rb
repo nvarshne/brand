@@ -75,4 +75,12 @@ class UserTest < ActiveSupport::TestCase
     @user.remember_digest = nil
     assert_not @user.authenticated?(:remember, '')
   end
+
+  test "associated microposts should be destroyed" do
+    @user.save
+    @user.proposals.create!(summary: "Lorem ipsum")
+    assert_difference 'Proposal.count', -1 do
+      @user.destroy
+    end
+  end
 end

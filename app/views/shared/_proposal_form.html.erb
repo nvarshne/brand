@@ -1,0 +1,7 @@
+<%= form_for(@proposal) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_area :summary, placeholder: "Enter summary of new proposal..." %>
+  </div>
+  <%= f.submit "Compose new proposal", class: "btn btn-primary" %>
+<% end %>

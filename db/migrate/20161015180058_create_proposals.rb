@@ -4,7 +4,7 @@ class CreateProposals < ActiveRecord::Migration[5.0]
       t.text :summary
       t.references :user, foreign_key: true
 
-      t.timestamps # rails created_at, updated_at
+      t.timestamps # created_at, updated_at
     end
     add_index :proposals, [:user_id, :created_at] # Multiple key index
   end

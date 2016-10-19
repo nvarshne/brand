@@ -1,7 +1,7 @@
 <li id="proposal-<%= proposal.id %>">
   <%= link_to gravatar_for(proposal.user, size: 50), proposal.user %>
+  <span class="summary"><%= link_to proposal.summary, proposal %></span>
   <span class="user"><%= link_to proposal.user.name, proposal.user %></span>
-  <span class="summary"><%= proposal.summary %></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(proposal.created_at) %> ago.
     <% if current_user?(proposal.user) %>

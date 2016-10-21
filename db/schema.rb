@@ -17,11 +17,37 @@ ActiveRecord::Schema.define(version: 20161015180058) do
 
   create_table "proposals", force: :cascade do |t|
     t.text     "summary"
-    t.integer  "user_id"
+    t.integer  "seller_id"
+    t.integer  "site_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "created_at"], name: "index_proposals_on_user_id_and_created_at", using: :btree
-    t.index ["user_id"], name: "index_proposals_on_user_id", using: :btree
+    t.index ["seller_id", "created_at"], name: "index_proposals_on_seller_id_and_created_at", using: :btree
+    t.index ["seller_id"], name: "index_proposals_on_seller_id", using: :btree
+    t.index ["site_id"], name: "index_proposals_on_site_id", using: :btree
+  end
+
+  create_table "publishers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sellers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "publisher_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["publisher_id"], name: "index_sellers_on_publisher_id", using: :btree
+    t.index ["user_id"], name: "index_sellers_on_user_id", using: :btree
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.integer  "publisher_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["publisher_id"], name: "index_sites_on_publisher_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,7 +57,7 @@ ActiveRecord::Schema.define(version: 20161015180058) do
     t.datetime "updated_at",                        null: false
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.boolean  "admin"
+    t.boolean  "admin",             default: false
     t.string   "activation_digest"
     t.boolean  "activated",         default: false
     t.datetime "activated_at"
@@ -40,5 +66,9 @@ ActiveRecord::Schema.define(version: 20161015180058) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
-  add_foreign_key "proposals", "users"
+  add_foreign_key "proposals", "sellers"
+  add_foreign_key "proposals", "sites"
+  add_foreign_key "sellers", "publishers"
+  add_foreign_key "sellers", "users"
+  add_foreign_key "sites", "publishers"
 end

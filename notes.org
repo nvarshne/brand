@@ -11,7 +11,6 @@ $ rails generate integration_test users_signup
 $ rails routes
 ```
 
-
 * Ruby Notes
 .inspect method on objects returns a string representation
 
@@ -42,3 +41,30 @@ can look at them through heroku CLI
 $ heroku config:get SENDGRID_USERNAME
 $ heroku config:get SENDGRID_PASSWORD
 ```
+
+
+
+* TODO
+
+Controllers
+1) CREATE PROPOSAL -- assoc with seller rather than user. REMEMBER to also assoc with publisher
+2) CREATE USER -- for now, CREATE SELLER
+
+Views
+1) Show sites for each proposal
+
+* PROPOSAL
+summary/title 200 characters
+description
+site
+seller NAME from PUBLISHER
+total price: TBD 
+type: video, gallery, article   ENUM
+
+* SITE
+categories ENUM
+
+
+SHOW LIST FOR site
+
+

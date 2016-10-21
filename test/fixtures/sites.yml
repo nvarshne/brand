@@ -1,9 +1,9 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+site1:
+  publisher: publisher1
+  name: "someblog"
+  url: "someblog.bigblog.com"
 
-one:
-  publisher: one
-  name: MyString
-
-two:
-  publisher: two
-  name: MyString
+site2:
+  publisher: publisher2
+  name: "someblog"
+  url: "someblog.bigblog.com"

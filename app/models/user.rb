@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :proposals, dependent: :destroy
+  has_one :seller, dependent: :destroy
+  has_many :proposals, through: :seller
   attr_accessor :remember_token, :activation_token, :reset_token #virtual fields.
   before_save   :downcase_email
   before_create :create_activation_digest

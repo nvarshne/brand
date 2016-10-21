@@ -1,7 +1,5 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+publisher1:
+  name: "bigblog"
 
-one:
-  name: MyString
-
-two:
-  name: MyString
+publisher2:
+  name: "biggerblog"

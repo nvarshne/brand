@@ -6,26 +6,26 @@ class UserTest < ActiveSupport::TestCase
                      password: "foobar", password_confirmation: "foobar")
   end
 
-  test "overall user validation should accept valid user" do
+  test "setup should be valid" do
     assert @user.valid?
   end
 
-  test "user name validation should reject absence" do
+  test "name validation should reject absence" do
     @user.name = ""
     assert_not @user.valid?
   end
 
-  test "user email validation should reject absence" do
+  test "email validation should reject absence" do
     @user.email = " "
     assert_not @user.valid?
   end
 
-  test "user name validation should reject long name" do
+  test "name validation should reject long name" do
     @user.name = "a" * 51
     assert_not @user.valid?
   end
 
-  test "user email validation should reject long email" do
+  test "email validation should reject long email" do
     @user.email = "a" * 244 + "@example.com"
     assert_not @user.valid?
   end
@@ -76,9 +76,21 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
 
-  test "associated microposts should be destroyed" do
+  test "associated sellers should be destroyed" do
+    publisher = publishers(:publisher1)
     @user.save
-    @user.proposals.create!(summary: "Lorem ipsum")
+    @user.create_seller!(publisher: publisher)
+    assert_difference 'Seller.count', -1 do
+      @user.destroy
+    end
+  end
+
+  test "associated proposals should be destroyed" do
+    publisher = publishers(:publisher1)
+    site = sites(:site1)
+    @user.save
+    @user.create_seller!(publisher: publisher)
+    @user.seller.proposals.create!(summary: "Lorem ipsum", site: site)
     assert_difference 'Proposal.count', -1 do
       @user.destroy
     end

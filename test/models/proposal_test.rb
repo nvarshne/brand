@@ -2,26 +2,32 @@ require 'test_helper'
 
 class ProposalTest < ActiveSupport::TestCase
   def setup
-    @user = users(:james)
-    @proposal = @user.proposals.build(summary: "Lorem ipsum")
+    @seller = sellers(:seller1)
+    @site = sites(:site1)
+    @proposal = @seller.proposals.build(summary: "Lorem ipsum", site: @site)
   end
 
-  test "should be valid" do
+  test "setup should be valid" do
     assert @proposal.valid?
   end
 
-  test "user id should be present" do
-    @proposal.user_id = nil
+  test "seller id should be present" do
+    @proposal.seller_id = nil
+    assert_not @proposal.valid?
+  end
+
+  test "site id should be present" do
+    @proposal.site_id = nil
     assert_not @proposal.valid?
   end
 
   test "summary should be present" do
-    @proposal.summary = "   "
+    @proposal.summary = " " * 2
     assert_not @proposal.valid?
   end
 
-  test "summary should be at most 140 characters" do
-    @proposal.summary = "a" * 141
+  test "summary should be at most 200 characters" do
+    @proposal.summary = "a" * 201
     assert_not @proposal.valid?
   end
 

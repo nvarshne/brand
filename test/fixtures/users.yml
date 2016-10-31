@@ -5,6 +5,7 @@ james:
   admin: true
   activated: true
   activated_at: <%= Time.zone.now %>
+  publisher: publisher1
 
 brody:
   name: Brody Matanle
@@ -12,6 +13,7 @@ brody:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+  publisher: publisher1
 
 alice:
   name: Alice Applebees
@@ -19,6 +21,7 @@ alice:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+  publisher: publisher2
 
 bob:
   name: Bob Bottleservice
@@ -26,6 +29,7 @@ bob:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+  publisher: null
 
 <% 30.times do |n| %>
 user_<%= n %>:
@@ -34,4 +38,5 @@ user_<%= n %>:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+  publisher: publisher1
 <% end %>

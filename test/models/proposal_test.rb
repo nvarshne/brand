@@ -2,17 +2,17 @@ require 'test_helper'
 
 class ProposalTest < ActiveSupport::TestCase
   def setup
-    @seller = sellers(:seller1)
+    @user = users(:james)
     @site = sites(:site1)
-    @proposal = @seller.proposals.build(summary: "Lorem ipsum", site: @site)
+    @proposal = @user.proposals.build(summary: "Lorem ipsum", site: @site)
   end
 
   test "setup should be valid" do
     assert @proposal.valid?
   end
 
-  test "seller id should be present" do
-    @proposal.seller_id = nil
+  test "user id should be present" do
+    @proposal.user_id = nil
     assert_not @proposal.valid?
   end
 

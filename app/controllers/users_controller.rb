@@ -54,7 +54,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    # Before Filters
+  # Before Filters
 
     def correct_user
       @user = User.find(params[:id])

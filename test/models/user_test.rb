@@ -76,21 +76,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
 
-  test "associated sellers should be destroyed" do
-    publisher = publishers(:publisher1)
-    @user.save
-    @user.create_seller!(publisher: publisher)
-    assert_difference 'Seller.count', -1 do
-      @user.destroy
-    end
-  end
-
   test "associated proposals should be destroyed" do
-    publisher = publishers(:publisher1)
     site = sites(:site1)
     @user.save
-    @user.create_seller!(publisher: publisher)
-    @user.seller.proposals.create!(summary: "Lorem ipsum", site: site)
+    @user.proposals.create!(summary: "Lorem ipsum", site: site)
     assert_difference 'Proposal.count', -1 do
       @user.destroy
     end

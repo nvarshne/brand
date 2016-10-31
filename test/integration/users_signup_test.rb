@@ -2,6 +2,8 @@ require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
+#TODO change these tests to ensure that a publisher has been designated to this user!!!!!
+
   # reset the global deliveries array in the setup for these tests
   def setup
     ActionMailer::Base.deliveries.clear

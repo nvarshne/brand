@@ -47,8 +47,8 @@ $ heroku config:get SENDGRID_PASSWORD
 * TODO
 
 Controllers
-1) CREATE PROPOSAL -- assoc with seller rather than user. REMEMBER to also assoc with publisher
-2) CREATE USER -- for now, CREATE SELLER
+1) CREATE USER -- for now, CREATE SELLER
+2) CREATE PROPOSAL -- assoc with seller rather than user. REMEMBER to also assoc with publisher
 
 Views
 1) Show sites for each proposal
@@ -64,7 +64,22 @@ type: video, gallery, article   ENUM
 * SITE
 categories ENUM
 
-
 SHOW LIST FOR site
 
 
+* TODO
+publisher creation process
+
+Team LEAD can invite people
+Emailer
+
+publisher --- "validated" field. confirmed by colab
+
+now I have an interesting problem. I can create proposals as a user as long as that proposal has a site attached. Interesting.
+
+
+* TODO
+user signup ---- must already exist in database, with connection to publisher
+
+
+new invitation table

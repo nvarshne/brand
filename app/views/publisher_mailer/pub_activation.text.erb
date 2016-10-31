@@ -1,0 +1,8 @@
+Yo, CoLab!
+
+We got a new publisher that needs to be activated. Check it out, and click that link to activate.
+
+<%= @publisher.to_s %>
+
+<%= edit_publisher_activation_url(@publisher.activation_token,
+                                  name: @publisher.name) %>

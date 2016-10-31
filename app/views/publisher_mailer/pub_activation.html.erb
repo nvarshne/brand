@@ -1,0 +1,12 @@
+<h1>CoLab</h1>
+
+<p> Yo, CoLab! </p>
+
+<p>
+    We got a new publisher that needs to be activated. Check it out, and click that link to activate.
+
+    <%= @publisher %> TODO do I need to print this object?
+
+    <%= link_to "Activate", edit_publisher_activation_url(@publisher.activation_token,
+                                                          name: @publisher.name) %>
+</p>

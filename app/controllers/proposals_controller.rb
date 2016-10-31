@@ -33,7 +33,7 @@ class ProposalsController < ApplicationController
   private
 
     def proposal_params
-      params.require(:proposal).permit(:summary)
+      params.require(:proposal).permit(:summary, :site_id)
     end
 
     def correct_user

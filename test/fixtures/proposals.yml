@@ -1,55 +1,55 @@
 example_adspace:
   summary: "some adspace 10mins"
   created_at: <%= 10.minutes.ago %>
-  seller: seller1
+  user: james
   site: site1
 
 fake_adspace:
   summary: "some adspace 3yrs"
   created_at: <%= 3.years.ago %>
-  seller: seller1
+  user: james
   site: site1
 
 fake_newer_adspace:
   summary: "some adspace 2hrs"
   created_at: <%= 2.hours.ago %>
-  seller: seller1
+  user: james
   site: site1
 
 most_recent:
   summary: "Writing a short test"
   created_at: <%= Time.zone.now %>
-  seller: seller1
+  user: james
   site: site1
 
 <% 30.times do |n| %>
 proposal_<%= n %>:
   summary: <%= Faker::Lorem.sentence(5) %>
   created_at: <%= 42.days.ago %>
-  seller: seller1
+  user: james
   site: site1
 <% end %>
 
 other_space:
   summary: "selling some space on my media, nice"
   created_at: <%= 2.years.ago %>
-  seller: seller2
+  user: brody
   site: site1
 
 other_3day_space:
   summary: "looking to sell a little project"
   created_at: <%= 3.days.ago %>
-  seller: seller2
+  user: brody
   site: site1
 
 other_other_space:
   summary: "Selling x space"
   created_at: <%= 10.minutes.ago %>
-  seller: seller3
+  user: alice
   site: site2
 
 more_other_other_space:
   summary: "Selling x space again"
   created_at: <%= 4.hours.ago %>
-  seller: seller3
+  user: alice
   site: site2

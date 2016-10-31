@@ -1,15 +1,15 @@
 class User < ApplicationRecord
-  has_one :seller, dependent: :destroy
-  has_many :proposals, through: :seller
+  belongs_to :publisher, optional: true
+  has_many :proposals, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token #virtual fields.
   before_save   :downcase_email
   before_create :create_activation_digest
-  validates :name, presence: true, length: { maximum: 50 }
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password #makes password read-only, validates confirmation, ensures password_digest is present, loads encrypt/authenticate instance methods
+  validates :name, presence: true, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # Returns the hash digest of the given string.
@@ -30,7 +30,7 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  # Returns True if the remember_token's hash matches the remember_digest, False otherwise
+  # Returns True if the token's hash matches the digest, False otherwise (used for remember_token and activation_token, etc.)
   def authenticated?(attribute, token)
     digest = self.send("#{attribute}_digest")
     return false if digest.nil?
@@ -68,6 +68,10 @@ class User < ApplicationRecord
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  def seller?
+    self.publisher != nil
   end
 
   # TODO

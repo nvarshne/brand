@@ -1,0 +1,2 @@
+module PublisherActivationsHelper
+end

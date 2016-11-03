@@ -1,3 +1,7 @@
+integrationTestInvite:
+  email: user@example.com
+  publisher: publisher1
+
 invitation1:
   email: prospectiveuser@gmail.com
   publisher: publisher1
@@ -5,3 +9,13 @@ invitation1:
 invitation2:
   email: prospectiveuser2@gmail.com
   publisher: publisher2
+
+brody:
+  email: bmatanle@gmail.com
+  publisher: publisher1
+
+<% 30.times do |n| %>
+invitation_<%= n %>:
+  email: <%= "user-#{n}@hotmail.gov" %>
+  publisher: publisher1
+<% end %>

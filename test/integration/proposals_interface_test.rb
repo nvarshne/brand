@@ -10,6 +10,7 @@ class ProposalsInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get root_path
     assert_select 'div.pagination'
+
     get new_proposal_path
     # Invalid submission
     assert_no_difference 'Proposal.count' do

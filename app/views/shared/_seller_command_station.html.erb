@@ -1,5 +1,8 @@
-<%= link_to "Create new proposal", new_proposal_path, class: "btn btn-primary" %>
-<br />
-<% if current_user.lead? %>
-    <%= link_to "Invite team members", new_invitation_path, class: "btn btn-secondary" %>
+<div class="command-buttonz">
+    <%= link_to "Create new proposal", new_proposal_path, class: "btn btn-default" %>
+</div>
+<div class="command-buttonz">
+    <% if current_user.lead? %>
+    <%= link_to "Invite team members", new_invitation_path, class: "btn btn-default" %>
 <% end %>
+</div>

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_secure_password #makes password read-only, validates confirmation, ensures password_digest is present, loads encrypt/authenticate instance methods
   validates :name, presence: true, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validate :check_invitation #TODO switch to before_create
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -72,6 +73,17 @@ class User < ApplicationRecord
 
   def seller?
     self.publisher_id
+  end
+
+  def check_invitation
+    invitation = Invitation.find_by(email: self.email)
+    if !self.lead
+      if invitation
+        self.publisher_id = invitation.publisher_id
+      else
+        errors.add(:lead, "User needs invitation")
+      end
+    end
   end
 
   # TODO

@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   resources :sites,                 only: [:create, :destroy]
   resources :publishers,            only: [:create, :destroy, :edit]
   resources :publisher_activations, only: [:edit]
+  resources :invitations,           only: [:new, :create]
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
-#TODO change these tests to ensure that a publisher has been designated to this user!!!!!
+#TODO change these tests to ensure that a publisher has been designated to this user before he signs up!!!!!
 
   # reset the global deliveries array in the setup for these tests
   def setup

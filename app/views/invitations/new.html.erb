@@ -1,0 +1,15 @@
+<% provide(:title, 'New Invitation') %>
+<h1><%= yield(:title) %></h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@invitation) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+
+                <%= f.label :email %>
+                <%= f.email_field :email, class: 'form-control' %>
+
+            <%= f.submit "Invite", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>

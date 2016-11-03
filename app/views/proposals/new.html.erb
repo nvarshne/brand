@@ -1,0 +1,17 @@
+<% provide(:title, 'New Proposal') %>
+<h1><%= yield(:title) %></h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@proposal) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+
+            <div class="field">
+                <%= f.label :summary %>
+                <%= f.text_area :summary, placeholder: "Proposal summary..." %>
+            </div>
+
+            <%= f.submit "Submit proposal", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>

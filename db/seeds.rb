@@ -1,12 +1,41 @@
-publisher = Publisher.create!(name: "Example Corp")
+publisher1 = Publisher.create!(name: "Org Inc",
+                               activated: true,
+                               activated_at: Time.zone.now)
+site1 = publisher1.sites.create!(name: "Org Inc Sports",
+                                 url: "sports.com")
+site2 = publisher1.sites.create!(name: "Org Inc Life",
+                                 url: "life.com")
+publisher2 = Publisher.create!(name: "Org Deux",
+                               activated: true,
+                               activated_at: Time.zone.now)
+site3 = publisher2.sites.create!(name: "2Money",
+                                 url: "money.com")
 
-User.create!(name:  "Example User",
+password = "foobar"
+User.create!(name:  "Example Admin",
              email: "example@gmail.com",
-             password:              "foobar",
-             password_confirmation: "foobar",
-             admin: true,
+             password:              password,
+             password_confirmation: password,
              activated: true,
-             activated_at: Time.zone.now)
+             activated_at: Time.zone.now,
+             admin: true)
+
+User.create!(name: "Example Lead",
+             email: "lead@gmail.com",
+             password:              password,
+             password_confirmation: password,
+             activated: true,
+             activated_at: Time.zone.now,
+             publisher: publisher1,
+             lead: true)
+
+User.create!(name: "Example Team Member",
+             email: "member@gmail.com",
+             password:              password,
+             password_confirmation: password,
+             activated: true,
+             activated_at: Time.zone.now,
+             publisher: publisher1)
 
 99.times do |n|
   name  = Faker::Name.name
@@ -17,13 +46,12 @@ User.create!(name:  "Example User",
                password:              password,
                password_confirmation: password,
                activated: true,
-               activated_at: Time.zone.now)
+               activated_at: Time.zone.now,
+               publisher: publisher1)
 end
 
-site = Site.create!(name: "Example Sports", url: "example.sports.com", publisher: publisher)
-
-users = User.order(:created_at).take(6)
+users = User.where(admin: false).order(:created_at).take(6)
 50.times do
   summary = Faker::Lorem.sentence(5)
-  users.each { |user| user.proposals.create!(summary: summary, site: site) }
+  users.each { |user| user.proposals.create!(summary: summary, site: site1) }
 end

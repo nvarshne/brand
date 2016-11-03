@@ -2,7 +2,8 @@ class Publisher < ApplicationRecord
   attr_accessor :activation_token
   has_many :sites
   has_many :users
-  accepts_nested_attributes_for :users
+  has_many :invitations
+  accepts_nested_attributes_for :users, :sites
   before_create :create_activation_digest
   validates :name, presence: true,
                    length: { maximum: 50 },

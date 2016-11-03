@@ -51,8 +51,4 @@ class PublishersController < ApplicationController
     def publisher_only_params
       params.require(:publisher).permit(:name)
     end
-
-    def lead_user
-      redirect_to(root_url) unless current_user.lead?
-    end
 end

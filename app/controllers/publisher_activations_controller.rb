@@ -1,6 +1,7 @@
 class PublisherActivationsController < ApplicationController
 
   # Linked from mail
+  # GET /publisher_activations/:id/?name=:name
   def edit
     publisher = Publisher.find_by(name: params[:name])
     if publisher && !publisher.activated? && publisher.authenticated?(:activation, params[:id])

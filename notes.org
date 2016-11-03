@@ -7,8 +7,12 @@ $ rails generate integration_test users_signup
 
 `$ bundle` === `$ bundle install`
 
+
+`$ rails routes`
+
 ```
-$ rails routes
+$ rails db:reset #loads from schema.rb
+$ rails db:drop db:create db:migrate db:seed #loads from migrations
 ```
 
 * Ruby Notes
@@ -19,8 +23,6 @@ $ rails routes
 String interpolation: "some text #{varToInterpolate} some text"
 
 * Database Migrations
-Necessary to change our database in any way.
-
 `$ rails generate migrations new_mig some_field:string`
 
 then edit the change function in db/migrate/XXXXXXXXX_new_mig.rb to do what is necessary 
@@ -42,44 +44,48 @@ $ heroku config:get SENDGRID_USERNAME
 $ heroku config:get SENDGRID_PASSWORD
 ```
 
+* TODO site creation during publisher creation
+
+* TODO Use logged_in on static_pages#home. switch to shared logged_in_user
+
+* TODO Team Leads Can Create Proposals
+
+* TODO Add Publisher And Site Filters to Proposal Index
+
+* TODO User Signup. New Invitations Table
+  CHANGE user signup ---- must already exist in database, with connection to publisher
+  
+* TODO Add type to PROPOSAL
+  Total Proposal Types:
+  summary/title 200 characters
+  description
+  site
+  seller NAME from PUBLISHER
+  total price: TBD 
+
+* TODO Add categories to SITE
+
+* TODO Sites Controller
+  def index ---- a list of sites
+  def show --- a list of proposals per site
+
+* TODO Proposal View
+  Views - show site for each proposal
+
+* TODO StaticPages team edit features
+  Team LEAD invitations -- EMAILER!!!
+  publisher --- "validated" field. confirmed by colab
+
+* TODO Add Site To Proposal Creation
+  note: accept_nested_attributes_for via belongs_to works fine
+
+* TODO Replace Email For Publisher Activation To Colab Admins
+  send publisher registration email to User.where(admin === true)
+
+**** TODO (far away)
+     add a rails enum for user role. unactivated, seller, buyer, deleted
 
 
-* TODO
-
-Controllers
-1) CREATE USER -- for now, CREATE SELLER
-2) CREATE PROPOSAL -- assoc with seller rather than user. REMEMBER to also assoc with publisher
-
-Views
-1) Show sites for each proposal
-
-* PROPOSAL
-summary/title 200 characters
-description
-site
-seller NAME from PUBLISHER
-total price: TBD 
-type: video, gallery, article   ENUM
-
-* SITE
-categories ENUM
-
-SHOW LIST FOR site
 
 
-* TODO
-publisher creation process
-
-Team LEAD can invite people
-Emailer
-
-publisher --- "validated" field. confirmed by colab
-
-now I have an interesting problem. I can create proposals as a user as long as that proposal has a site attached. Interesting.
-
-
-* TODO
-user signup ---- must already exist in database, with connection to publisher
-
-
-new invitation table
+* TODO Be able to resend invitations from /invitations/new

@@ -17,9 +17,9 @@ class ProposalsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'div#error_explanation'
     # Valid submission
     summary = "This proposal is a pretty cool place for any campaign to go."
-    site = sites(:site1)
+    site_id = sites(:site1).id
     assert_difference 'Proposal.count', 1 do
-      post proposals_path, params: { proposal: { summary: summary, site_id: site.id } }
+      post proposals_path, params: { proposal: { summary: summary, site_id: site_id } }
     end
     assert_redirected_to root_url
     follow_redirect!

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = User.new(email: params[:email])
   end
 
   def create

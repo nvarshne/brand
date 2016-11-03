@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028021822) do
+ActiveRecord::Schema.define(version: 20161101052241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invitations", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "publisher_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["email"], name: "index_invitations_on_email", using: :btree
+    t.index ["publisher_id"], name: "index_invitations_on_publisher_id", using: :btree
+  end
 
   create_table "proposals", force: :cascade do |t|
     t.text     "summary"
@@ -65,6 +74,7 @@ ActiveRecord::Schema.define(version: 20161028021822) do
     t.index ["publisher_id"], name: "index_users_on_publisher_id", using: :btree
   end
 
+  add_foreign_key "invitations", "publishers"
   add_foreign_key "proposals", "sites"
   add_foreign_key "proposals", "users"
   add_foreign_key "sites", "publishers"

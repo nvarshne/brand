@@ -26,8 +26,9 @@ User.create!(name: "Example Lead",
              password_confirmation: password,
              activated: true,
              activated_at: Time.zone.now,
+             picture: 'pic.jpg')
              publisher: publisher1,
-             lead: true)
+             lead: true,
 
 User.create!(name: "Example Team Member",
              email: "member@gmail.com",

@@ -5,7 +5,7 @@ class ProposalsController < ApplicationController
 
   # GET /proposals/new/
   def new
-    @proposal = Proposal.new
+    @proposal = current_user.proposals.build
   end
 
   # GET /proposals/:id/

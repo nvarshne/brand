@@ -6,6 +6,6 @@ class CreateInvitations < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :invitations, :email
+    add_index :invitations, :email, :unique: true
   end
 end

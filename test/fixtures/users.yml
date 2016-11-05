@@ -24,6 +24,7 @@ alice:
   activated: true
   activated_at: <%= Time.zone.now %>
   publisher: publisher2
+  lead: true
 
 bob:
   name: Bob Bottleservice

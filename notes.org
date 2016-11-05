@@ -44,6 +44,10 @@ $ heroku config:get SENDGRID_USERNAME
 $ heroku config:get SENDGRID_PASSWORD
 ```
 
+* TODO profile image edit in user edit section
+
+* TODO default image in production 
+
 * TODO site creation during publisher creation
 
 * TODO Use logged_in on static_pages#home. switch to shared logged_in_user
@@ -52,9 +56,6 @@ $ heroku config:get SENDGRID_PASSWORD
 
 * TODO Add Publisher And Site Filters to Proposal Index
 
-* TODO User Signup. New Invitations Table
-  CHANGE user signup ---- must already exist in database, with connection to publisher
-  
 * TODO Add type to PROPOSAL
   Total Proposal Types:
   summary/title 200 characters

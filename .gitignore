@@ -1,6 +1,8 @@
 # Get My Notes File Out Of The Repo!
 notes.org
 
+/public/uploads/
+
 /**/.#*
 
 # Ignore bundler config.

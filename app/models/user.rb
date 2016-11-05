@@ -2,6 +2,7 @@ class User < ApplicationRecord
   belongs_to :publisher, optional: true
   has_many   :proposals, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token #virtual fields.
+  mount_uploader :picture, PictureUploader
   before_save   :downcase_email
   before_create :create_activation_digest
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -11,7 +12,7 @@ class User < ApplicationRecord
   has_secure_password #makes password read-only, validates confirmation, ensures password_digest is present, loads encrypt/authenticate instance methods
   validates :name, presence: true, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  validate :check_invitation #TODO switch to before_create
+  validate :check_invitation, on: :create
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -88,7 +89,6 @@ class User < ApplicationRecord
 
   # TODO
   # Defines a proto-feed.
-  # See "Following users" for the full implementation.
   def feed
     Proposal.where("user_id = ?", id)
   end

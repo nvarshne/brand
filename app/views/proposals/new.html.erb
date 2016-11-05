@@ -6,10 +6,11 @@
         <%= form_for(@proposal) do |f| %>
             <%= render 'shared/error_messages', object: f.object %>
 
-            <div class="field">
-                <%= f.label :summary %>
-                <%= f.text_area :summary, placeholder: "Proposal summary..." %>
-            </div>
+            <%= f.label :summary %>
+            <%= f.text_area :summary, placeholder: "Proposal summary..." %>
+
+            <%= f.label :website %>
+            <%= f.collection_select :site_id, @proposal.user.publisher.sites, :id, :name, prompt: "Choose a website" %>
 
             <%= f.submit "Submit proposal", class: "btn btn-primary" %>
         <% end %>

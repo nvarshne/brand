@@ -13,7 +13,7 @@ site3 = publisher2.sites.create!(name: "2Money",
 
 password = "foobar"
 User.create!(name:  "Example Admin",
-             email: "example@gmail.com",
+             email: "admin@gmail.com",
              password:              password,
              password_confirmation: password,
              activated: true,

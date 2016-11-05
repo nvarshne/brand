@@ -2,6 +2,8 @@ class PublisherMailer < ApplicationMailer
 
   def pub_activation(publisher)
     @publisher = publisher
-    mail to: "jkmatanle@gmail.com", subject: "CoLab Publisher Activation"
+    User.where(admin: true).each do |u|
+      mail to: u.email, subject: "CoLab Publisher Activation"
+    end
   end
 end

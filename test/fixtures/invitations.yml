@@ -1,7 +1,3 @@
-integrationTestInvite:
-  email: user@example.com
-  publisher: publisher1
-
 invitation1:
   email: prospectiveuser@gmail.com
   publisher: publisher1

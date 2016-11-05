@@ -26,10 +26,11 @@ User.create!(name: "Example Lead",
              password_confirmation: password,
              activated: true,
              activated_at: Time.zone.now,
-             picture: 'pic.jpg')
+             picture: 'pic.jpg',
              publisher: publisher1,
-             lead: true,
+             lead: true)
 
+Invitation.create!(email: "member@gmail.com", publisher: publisher1)
 User.create!(name: "Example Team Member",
              email: "member@gmail.com",
              password:              password,
@@ -42,6 +43,7 @@ User.create!(name: "Example Team Member",
   name  = Faker::Name.name
   email = "example-#{n+1}@hotmail.gov"
   password = "password"
+  Invitation.create!(email: email, publisher: publisher1)
   User.create!(name:  name,
                email: email,
                password:              password,

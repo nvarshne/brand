@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_secure_password #makes password read-only, validates confirmation, ensures password_digest is present, loads encrypt/authenticate instance methods
   validates :name, presence: true, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validate :picture_size
   validate :check_invitation, on: :create
 
   # Returns the hash digest of the given string.
@@ -77,13 +78,22 @@ class User < ApplicationRecord
   end
 
   def check_invitation
+    if admin?
+      return
+    end
     invitation = Invitation.find_by(email: self.email)
-    if !self.lead
+    if !lead?
       if invitation
         self.publisher_id = invitation.publisher_id
       else
-        errors.add(:lead, "User needs invitation")
+        errors.add(:publisher_id, "could not be inferred. User needs invitation.")
       end
+    end
+  end
+
+  def picture_size
+    if picture.size > 5.megabytes
+      errors.add(:picture, "should be less than 5MB")
     end
   end
 

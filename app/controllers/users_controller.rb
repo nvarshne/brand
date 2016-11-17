@@ -1,16 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :logged_in_user, except: [:new, :create]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
-
-  def index
-    @users = User.where(activated: true).paginate(page: params[:page])
-  end
-
-  def show
-    @user = User.find(params[:id])
-    @proposals = @user.proposals.paginate(page: params[:page], :per_page => 15)
-  end
 
   def new
     @user = User.new(email: params[:email])
@@ -25,6 +16,16 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def index
+    @users = User.where(activated: true).paginate(page: params[:page])
+  end
+
+  #TODO do not require login to show basic info about a user
+  def show
+    @user = User.find(params[:id])
+    @proposals = @user.proposals.paginate(page: params[:page], per_page: 15)
   end
 
   # GET /users/:id/edit/
@@ -59,11 +60,6 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
-    end
-
-    # Confirms an admin user.
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
     end
 
 end

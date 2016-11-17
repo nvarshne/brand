@@ -27,6 +27,15 @@
                 <%= builder.password_field :password_confirmation, class: 'form-control' %>
             <% end %>
 
+            <%= f.fields_for :sites do |builder| %>
+                <h2> Websites: The Locations Of Your Publisher's Content </h2>
+                <%= builder.label :name, "Website Name" %>
+                <%= builder.text_field :name, class: 'form-control' %>
+
+                <%= builder.label :URL %>
+                <%= builder.text_field :url, class: 'form-control' %>
+
+            <% end %>
             <%= f.submit "Register Organization", class: "btn btn-primary" %>
         <% end %>
     </div>

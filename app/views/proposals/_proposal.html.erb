@@ -1,6 +1,8 @@
 <li id="proposal-<%= proposal.id %>">
     <%= link_to (image_tag (proposal.user.picture.url (:thumb)), class: "avatar"), proposal.user %>
     <span class="summary"><%= link_to proposal.summary, proposal %></span>
+    <span class="site"><%= link_to proposal.site.name, proposal.site %></span>
+    <span class="publisher"><%= link_to proposal.site.publisher.name, proposal.site.publisher %></span>
     <span class="user"><%= link_to proposal.user.name, proposal.user %></span>
     <span class="timestamp">
         Posted <%= time_ago_in_words(proposal.created_at) %> ago.

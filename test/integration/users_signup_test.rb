@@ -2,8 +2,6 @@ require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
-#TODO change these tests to ensure that a publisher has been designated to this user before he signs up!!!!! AND he must have an invite!
-
   # reset the global deliveries array in the setup for these tests
   def setup
     ActionMailer::Base.deliveries.clear
@@ -25,13 +23,14 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test "valid signup information with account activation" do
     get signup_path
     assert_difference 'User.count', 1 do
-      post users_path, params: { user: { name:  "Example User",
-                                         email: "user@example.com",
+      post users_path, params: { user: { name:  "Example User (Prospect Fulfilled!)",
+                                         email: "prospectiveuser@gmail.com",
                                          password:              "password",
                                          password_confirmation: "password" } }
     end
     assert_equal 1, ActionMailer::Base.deliveries.size
     user = assigns(:user)
+    assert_not_nil user.publisher # User must have been assigned a publisher.
     assert_not user.activated?
     # Try to log in before activation.
     log_in_as(user)

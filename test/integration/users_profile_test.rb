@@ -7,7 +7,13 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     @user = users(:james)
   end
 
-  test "profile display" do
+  test "Must be logged in to display user profile" do
+    get user_path(@user)
+    assert_redirected_to login_url
+  end
+
+  test "profile display, show admin from any ole buyer" do
+    log_in_as(users(:brody))
     get user_path(@user)
     assert_template 'users/show'
     assert_select 'title', full_title(@user.name)

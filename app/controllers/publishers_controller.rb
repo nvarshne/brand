@@ -1,13 +1,18 @@
 class PublishersController < ApplicationController
+  before_action :logged_in_user, except: [:new, :create]
+  before_action :team_user, only: :show
   before_action :lead_user, only: [:edit, :update, :destroy]
-  before_action :team_user, only: [:show]
-  before_action :admin_user, only: [:index, :show, :destroy]
+  before_action :admin_user, only: :index
 
+  # Platform Registration
+  # GET /publishers/new/
   def new
     @publisher = Publisher.new
     @publisher.users.build
+    @publisher.sites.build
   end
 
+  # POST /publishers/
   def create
     @publisher = Publisher.new(publisher_params)
     @publisher.users.map{ |u| u[:lead] = true }
@@ -20,20 +25,20 @@ class PublishersController < ApplicationController
     end
   end
 
-  def destroy
+  # GET /publishers/
+  def index
   end
 
+  # GET /publishers/:id
   def show
   end
 
   # GET /publishers/:id/edit/
   def edit
-    @publisher = Publisher.find(params[:id])
   end
 
-  # PATCH /publishers/:id/edit
+  # PATCH /publishers/:id/
   def update
-    @publisher = Publisher.find(params[:id])
     if @publisher.update_attributes(publisher_only_params)
       flash[:success] = "Publisher updated"
       redirect to @publisher
@@ -42,13 +47,32 @@ class PublishersController < ApplicationController
     end
   end
 
+  # DELETE /publishers/:id/
+  def destroy
+  end
+
   private
     def publisher_params
       params.require(:publisher).permit(:name,
-                                        users_attributes: [:name, :email, :password, :password_confirmation])
+                                        users_attributes: [:name, :email, :password, :password_confirmation],
+                                        sites_attributes: [:name, :url])
     end
 
     def publisher_only_params
       params.require(:publisher).permit(:name)
+    end
+
+    def team_user
+      @publisher = Publisher.find(params[:id])
+      if !admin || !current_user.publisher == @publisher
+        redirect_to(root_url)
+      end
+    end
+
+    def lead_user
+      @publisher = Publisher.find(params[:id])
+      if !current_user.lead? && current_user.publisher == @publisher
+        redirect_to(root_url)
+      end
     end
 end

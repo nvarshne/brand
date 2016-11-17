@@ -12,17 +12,13 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    #TODO fix
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
     def seller_user
-      redirect_to root_url unless current_user.seller?
-    end
-
-    def lead_user
-      redirect_to(root_url) unless current_user.lead?
-    end
-
-    #TODO fix
-    def team_user
-      redirect_to(root_url) unless current_user.publisher == Proposal.find(params[:id]).user.publisher
+      if !current_user.seller?
+        redirect_to root_url
+      end
     end
 end

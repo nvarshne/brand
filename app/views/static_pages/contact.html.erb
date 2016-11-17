@@ -1,6 +1,8 @@
 <% provide(:title, 'Contact') %>
-<h1>Contact</h1>
+<h1>Contact Us</h1>
 <p>
-    Contact me here pls
-    <a href="mailto:jmatanle@wisc.edu?Subject=AdPages">contact page</a>.
+    Contact the owners of this website:
+    <%= mail_to "lynn@gobrandverge.com", "Lynn", subject: "BrandVerge Support" %>,
+    <%= mail_to "mollie@gobrandverge.com", "Mollie", subject: "BrandVerge Support" %>,
+    <%= mail_to "james@gobrandverge.com", "James", subject: "BrandVerge Support" %>.
 </p>

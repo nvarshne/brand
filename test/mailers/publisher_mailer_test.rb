@@ -6,9 +6,9 @@ class PublisherMailerTest < ActionMailer::TestCase
     publisher.activation_token = User.new_token
     mail = PublisherMailer.pub_activation(publisher)
 
-    assert_equal "CoLab Publisher Activation", mail.subject
+    assert_equal "BrandVerge Publisher Activation", mail.subject
     assert_equal ["jmat@matanle.gov"],         mail.to
-    assert_equal ["noreply@colab0.com"],       mail.from
+    assert_equal ["noreply@gobrandverge.com"],       mail.from
     assert_match publisher.name,               mail.body.encoded
     assert_match publisher.activation_token,   mail.body.encoded
   end

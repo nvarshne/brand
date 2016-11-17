@@ -18,7 +18,7 @@ class PublishersController < ApplicationController
     @publisher.users.map{ |u| u[:lead] = true }
     if @publisher.save
       @publisher.send_activation_email
-      flash[:info] = "Colab will review your request to join the platform. In the meantime, please check your email to hear from us."
+      flash[:info] = "BrandVerge will review your request to join the platform. In the meantime, please check your email to hear from us."
       redirect_to root_url
     else
       render 'new'

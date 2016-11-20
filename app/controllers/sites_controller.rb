@@ -11,4 +11,14 @@ class SitesController < ApplicationController
     flash[:success] = "Site Deleted"
     redirect_to request.referrer || root_url
   end
+
+  def show
+    @site = Site.find(params[:id])
+    @proposals = @site.proposals.paginate(page: params[:page], per_page: 15)
+  end
+
+  # TODO only sites from activated publishers
+  def index
+    @sites = Site.all.paginate(page: params[:page], per_page: 15)
+  end
 end

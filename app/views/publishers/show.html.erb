@@ -1,0 +1,22 @@
+<%= provide(:title, @publisher.name) %>
+<div class="row">
+    <aside class="col-md-4">
+        <section class="publisher_info">
+            <h1>
+                <%= @publisher.name %>
+            </h1>
+            <% if false %>
+                <%= link_to "Edit Publisher", edit_publisher_path(@publisher) %>
+            <% end %>
+        </section>
+    </aside>
+    <div class="col-md-8">
+        <% if @publisher.proposals.any? %>
+            <h3> <%= @publisher.name %> Proposals (<%= @publisher.proposals.count %>)</h3>
+            <ol class="proposals">
+                <%= render @proposals %>
+            </ol>
+            <%= will_paginate @proposals %>
+        <% end %>
+    </div>
+</div>

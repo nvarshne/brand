@@ -22,6 +22,12 @@
         <div class="publisher" >
             Publisher: <%= @proposal.publisher.name %>
         </div>
+        <% if current_user?(@proposal.user) %>
+            <div class="delete">
+                <%= link_to "delete", @proposal, method: :delete,
+                data: { confirm: "You sure?" } %>
+            </div>
+        <% end %>
         <div class="respond btn btn-primary">
             Respond to this proposal.
         </div>

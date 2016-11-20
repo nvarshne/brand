@@ -1,0 +1,10 @@
+<% provide(:title, 'All publishers') %>
+<h1>All publishers</h1>
+
+<%= will_paginate %>
+
+<ul class="publishers">
+    <%= render @publishers %>
+</ul>
+
+<%= will_paginate %>

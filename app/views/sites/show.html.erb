@@ -1,0 +1,23 @@
+<%= provide(:title, @site.name) %>
+<div class="row">
+    <aside class="col-md-4">
+        <section class="site_info">
+            <h1>
+                <%= @site.name %>
+            </h1>
+            <%= link_to @site.url, "http://#{@site.url}", target: '_blank' %>
+            <% if false %>
+                <%= link_to "Edit Site", edit_site_path(@site) %>
+            <% end %>
+        </section>
+    </aside>
+    <div class="col-md-8">
+        <% if @site.proposals.any? %>
+            <h3> <%= @site.name %> Proposals (<%= @site.proposals.count %>)</h3>
+            <ol class="proposals">
+                <%= render @proposals %>
+            </ol>
+            <%= will_paginate @proposals %>
+        <% end %>
+    </div>
+</div>

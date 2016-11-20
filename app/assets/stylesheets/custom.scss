@@ -1,7 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* colors */
 $gray-medium-light: #eaeaea;
+$brick-red: #B22222;
 
 @mixin box_sizing {
     -moz-box-sizing:    border-box;
@@ -116,6 +118,12 @@ aside {
     section.user_info {
         margin-top: 20px;
     }
+    section.site_info {
+        margin-top: 20px;
+    }
+    section.publisher_info {
+        margin-top: 20px;
+    }
     section {
         padding: 10px 0;
         margin-top: 20px;
@@ -215,7 +223,6 @@ input {
         margin-left: 60px;
     }
     .site {
-        margin: 5px;
         color: $gray-darker;
     }
     .publisher {
@@ -252,13 +259,13 @@ span.picture {
 }
 
 
-/* Command Station */
+/* command station */
 
 .command-buttonz {
     padding: 5px;
 }
 
-/* Proposal Show */
+/* proposal show */
 .proposal {
     h1.summary {
         margin-top: 20px;
@@ -268,5 +275,35 @@ span.picture {
     }
     .respond {
         margin-top: 10px;
+    }
+    .delete {
+        display: block;
+        a {
+            color: $brand-danger;
+        }
+    }
+}
+
+/* publishers index */
+
+.publishers {
+    list-style: none;
+    margin: 0;
+    li {
+        overflow: auto;
+        padding: 10px 0;
+        border-bottom: 1px solid $gray-lighter;
+    }
+}
+
+/* sites index */
+
+.sites {
+    list-style: none;
+    margin: 0;
+    li {
+        overflow: auto;
+        padding: 10px 0;
+        border-bottom: 1px solid $gray-lighter;
     }
 }

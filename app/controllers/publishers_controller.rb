@@ -1,8 +1,8 @@
 class PublishersController < ApplicationController
   before_action :logged_in_user, except: [:new, :create]
-  before_action :team_user, only: :show
+  #before_action :team_user, only: :show
   before_action :lead_user, only: [:edit, :update, :destroy]
-  before_action :admin_user, only: :index
+  #before_action :admin_user, only: :index
 
   # Platform Registration
   # GET /publishers/new/
@@ -27,10 +27,13 @@ class PublishersController < ApplicationController
 
   # GET /publishers/
   def index
+    @publishers = Publisher.where(activated: true).paginate(page: params[:page])
   end
 
   # GET /publishers/:id
   def show
+    @publisher = Publisher.find(params[:id])
+    @proposals = @publisher.proposals.paginate(page: params[:page], per_page: 15)
   end
 
   # GET /publishers/:id/edit/

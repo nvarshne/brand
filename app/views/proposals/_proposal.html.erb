@@ -1,11 +1,11 @@
 <li id="proposal-<%= proposal.id %>">
     <%= link_to (image_tag (proposal.user.picture.url (:thumb)), class: "avatar"), proposal.user %>
     <span class="summary"><%= link_to proposal.summary, proposal %></span>
-    <span class="site"><%= link_to proposal.site.name, proposal.site %></span>
-    <span class="publisher"><%= link_to proposal.site.publisher.name, proposal.site.publisher %></span>
-    <span class="user"><%= link_to proposal.user.name, proposal.user %></span>
+    <span class="site">website: <%= link_to proposal.site.name, proposal.site %></span>
+    <span class="publisher">publisher: <%= link_to proposal.site.publisher.name, proposal.site.publisher %></span>
     <span class="timestamp">
-        Posted <%= time_ago_in_words(proposal.created_at) %> ago.
+        Posted <%= time_ago_in_words(proposal.created_at) %> ago by
+        <%= link_to proposal.user.name, proposal.user %>
         <% if current_user?(proposal.user) %>
             <%= link_to "delete", proposal, method: :delete,
             data: { confirm: "You sure?" } %>

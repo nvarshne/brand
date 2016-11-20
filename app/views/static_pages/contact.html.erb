@@ -1,8 +1,11 @@
 <% provide(:title, 'Contact') %>
 <h1>Contact Us</h1>
 <p>
-    Contact the owners of this website:
-    <%= mail_to "lynn@gobrandverge.com", "Lynn", subject: "BrandVerge Support" %>,
-    <%= mail_to "mollie@gobrandverge.com", "Mollie", subject: "BrandVerge Support" %>,
-    <%= mail_to "james@gobrandverge.com", "James", subject: "BrandVerge Support" %>.
+    <b>Comments, questions, bugs, seeking a penpal?</b><br />
+    Send us an email:
+    <ul>
+        <li><%= mail_to "lynn@gobrandverge.com", "Lynn", subject: "BrandVerge Support" %></li>
+        <li><%= mail_to "mollie@gobrandverge.com", "Mollie", subject: "BrandVerge Support" %></li>
+        <li>  <%= mail_to "james@gobrandverge.com", "James", subject: "BrandVerge Support" %></li>
+    </ul>
 </p>

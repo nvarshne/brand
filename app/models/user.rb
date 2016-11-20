@@ -97,10 +97,9 @@ class User < ApplicationRecord
     end
   end
 
-  # TODO
-  # Defines a proto-feed.
   def feed
-    Proposal.where("user_id = ?", id)
+    self.publisher.proposals.all
+    # Proposal.where("user_id = ?", id) # Just the user, no joins, twice as fast
   end
 
   private

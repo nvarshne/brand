@@ -1,1 +1,33 @@
-<p>samply page</p>
+<%= provide(:title, "Proposal") %>
+<div class="row">
+    <div class="col-md-9 proposal">
+        <h1 class="summary">
+            <%= @proposal.summary %>
+        </h1>
+        <div class="user">
+            Created by: <%= link_to @proposal.user.name, @proposal.user %>
+        </div>
+        <% unless @proposal.description.blank? %>
+            <div>
+                Description:
+                <div class="description">
+                    <%= @proposal.description %>
+                </div>
+            </div>
+        <% end %>
+        <div class="site">
+            Web location:
+            <%= link_to @proposal.site.name, "http://#{@proposal.site.url}", target: '_blank' %>
+        </div>
+        <div class="publisher" >
+            Publisher: <%= @proposal.publisher.name %>
+        </div>
+        <div class="respond btn btn-primary">
+            Respond to this proposal.
+        </div>
+    </div>
+    <% if false %>
+        <aside class="col-md-3">
+        </aside>
+    <% end %>
+</div>

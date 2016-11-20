@@ -2,6 +2,7 @@ class Publisher < ApplicationRecord
   attr_accessor :activation_token
   has_many :sites
   has_many :users
+  has_many :proposals, through: :sites
   has_many :invitations
   accepts_nested_attributes_for :users, :sites
   before_create :create_activation_digest

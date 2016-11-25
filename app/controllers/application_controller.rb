@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
+  around_action :set_user_time_zone, if: :logged_in?
 
   private
+
+    def set_user_time_zone(&block)
+      Time.use_zone(current_user.time_zone, &block)
+    end
 
     def logged_in_user
       unless logged_in?

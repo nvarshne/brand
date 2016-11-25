@@ -26,8 +26,7 @@ class ProposalsInterfaceTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
     follow_redirect!
     assert_match summary, response.body
-    # Delete post
-    assert_select 'a', text: 'delete'
+    # User can delete the new post
     first_proposal = @user.proposals.paginate(page: 1).first
     assert_difference 'Proposal.count', -1 do
       delete proposal_path(first_proposal)

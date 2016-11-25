@@ -17,7 +17,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_template 'users/new'
     assert_select 'div#error_explanation'
-    assert_select 'div.field_with_errors'
+    assert_select 'span.help-block'
   end
 
   test "valid signup information with account activation" do

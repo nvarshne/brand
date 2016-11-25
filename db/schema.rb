@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103181917) do
+ActiveRecord::Schema.define(version: 20161124024840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,17 @@ ActiveRecord::Schema.define(version: 20161103181917) do
     t.text     "description"
     t.integer  "user_id"
     t.integer  "site_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.boolean  "active"
+    t.boolean  "first_to_market"
+    t.datetime "expiration"
+    t.boolean  "sponsored"
+    t.bigint   "est_reach"
+    t.integer  "min_price"
+    t.integer  "max_price"
+    t.datetime "flight_date"
+    t.string   "support_doc"
     t.index ["site_id"], name: "index_proposals_on_site_id", using: :btree
     t.index ["user_id", "created_at"], name: "index_proposals_on_user_id_and_created_at", using: :btree
     t.index ["user_id"], name: "index_proposals_on_user_id", using: :btree
@@ -71,6 +80,7 @@ ActiveRecord::Schema.define(version: 20161103181917) do
     t.integer  "publisher_id"
     t.boolean  "lead",              default: false
     t.string   "picture"
+    t.string   "time_zone",         default: "UTC"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["publisher_id"], name: "index_users_on_publisher_id", using: :btree
   end

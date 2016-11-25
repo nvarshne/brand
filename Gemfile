@@ -20,6 +20,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'carrierwave',             '0.11.2'
 gem 'mini_magick',             '4.5.1'  # Image resizing
 gem 'fog',                     '1.38.0' # Upload in prod
+gem 'simple_form',             '3.3.1'
 
 group :development, :test do
   gem 'byebug',  '9.0.0', platform: :mri #'debugger'

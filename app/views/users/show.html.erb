@@ -6,12 +6,12 @@
                 <%= image_tag @user.picture.url, class: "avatar" %>
                 <%= @user.name %>
             </h1>
-            <%= link_to "Edit Profile", edit_user_path(@user) %>
             <% if @user.seller? %>
-                <span class="publisher">
-                    Publisher: <%= link_to @user.publisher.name, @user.publisher %>
-                </span>
+                <h4>
+                    <%= link_to @user.publisher.name, @user.publisher %>
+                </h4>
             <% end %>
+            <%= link_to "Edit Profile", edit_user_path(@user) %>
         </section>
     </aside>
     <div class="col-md-8">

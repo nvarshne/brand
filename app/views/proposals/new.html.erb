@@ -3,16 +3,13 @@
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <%= form_for(@proposal) do |f| %>
+        <%= simple_form_for(@proposal) do |f| %>
             <%= render 'shared/error_messages', object: f.object %>
 
-            <%= f.label :summary %>
-            <%= f.text_area :summary, placeholder: "Proposal summary..." %>
+            <%= f.input :summary %>
+            <%= f.input :site_id, collection: @proposal.user.publisher.sites %>
 
-            <%= f.label :website %>
-            <%= f.collection_select :site_id, @proposal.user.publisher.sites, :id, :name, prompt: "Choose a website" %>
-
-            <%= f.submit "Submit proposal", class: "btn btn-primary" %>
+            <%= f.button :submit, "Submit proposal", class: "btn btn-primary" %>
         <% end %>
     </div>
 </div>

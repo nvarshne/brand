@@ -9,6 +9,14 @@
                 <%= link_to "Edit Publisher", edit_publisher_path(@publisher) %>
             <% end %>
         </section>
+        <h4>Team Members:</h4>
+        <ol class="users">
+            <%= render @users %>
+        </ol>
+
+        <% if false %>
+            <li><%= link_to user.name, user %></li>
+        <% end %>
     </aside>
     <div class="col-md-8">
         <% if @publisher.proposals.any? %>

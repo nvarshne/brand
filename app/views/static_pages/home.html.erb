@@ -1,29 +1,35 @@
 <% if logged_in? %>
-    <% if current_user.seller? %>
-        <div class="row">
-            <aside class="col-md-4">
-                <section class="user_info">
-                    <%= render 'shared/user_info' %>
-                </section>
-                <section class="seller_command_station">
-                    <%= render 'shared/seller_command_station' %>
-                </section>
-            </aside>
-            <div class="col-md-8">
-                <h3>Publisher Feed</h3>
-                <%= render 'shared/feed' %>
-            </div>
-        </div>
-    <% else %>
-    <% end %>
-<% else %>
-    <div class="center jumbotron">
-        <h1>BrandVerge</h1>
-        <h2>Home page for those not logged in.</h2>
-        <p>
-            Hello, World! <br \>
-            Follow the link below to get started.
-        </p>
-        <%= link_to "Register Your Organization To Join The Platform", register_path, class: "btn btn-lg btn-primary" %>
+  <% if current_user.seller? %>
+    <div class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+          <%= render 'shared/user_info' %>
+        </section>
+        <section class="seller_command_station">
+          <%= render 'shared/seller_command_station' %>
+        </section>
+      </aside>
+      <div class="col-md-8">
+        <h3>Publisher Feed</h3>
+        <%= render 'shared/feed' %>
+      </div>
     </div>
+  <% else %>
+  <% end %>
+<% else %>
+  <div class="center jumbotron col-md-12">
+    <h1>BrandVerge</h1>
+    <div class="col-md-6" >
+      <p>Would you  like to be notified about this product?</p>
+      <%= simple_form_for(@subscriber) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.input :email %>
+        <%= f.button :submit, "Notify me!", class: "btn btn-default" %>
+      <% end %>
+    </div>
+    <div class="col-md-6" >
+      <p>Request to join the platform:</p>
+      <%= link_to "Register Your Organization", register_path, class: "btn btn-lg btn-primary" %>
+    </div>
+  </div>
 <% end %>

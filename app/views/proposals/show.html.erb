@@ -4,33 +4,83 @@
         <h1 class="summary">
             <%= @proposal.summary %>
         </h1>
-        <div class="user">
-            Created by: <%= link_to @proposal.user.name, @proposal.user %>
-        </div>
-        <% unless @proposal.description.blank? %>
+
+        <% if @proposal.first_to_market %>
             <div>
-                Description:
-                <div class="description">
-                    <%= @proposal.description %>
-                </div>
+                This is a First-To-Market offering
             </div>
         <% end %>
+
+        <% unless @proposal.description.blank? %>
+            <div>
+                Description: <div class="description"> <%= @proposal.description %> </div>
+            </div>
+        <% end %>
+
         <div class="site">
-            Web location:
+            Website:
             <%= link_to @proposal.site.name, "http://#{@proposal.site.url}", target: '_blank' %>
         </div>
+
         <div class="publisher" >
             Publisher: <%= @proposal.publisher.name %>
         </div>
-        <% if current_user?(@proposal.user) %>
-            <div class="delete">
-                <%= link_to "delete", @proposal, method: :delete,
-                data: { confirm: "You sure?" } %>
+
+        <div class="reach">
+            Estimated reach: <%= number_with_delimiter(@proposal.est_reach, delimiter: ',') %>
+        </div>
+
+        <div class="types">
+            Content type: <%= @proposal.types.to_sentence if @proposal.types %>
+        </div>
+
+        <div class="objective">
+            Primary objective: <%= @proposal.p_objective %>
+        </div>
+
+        <div class="indicators">
+            Indicators: <%= @proposal.p_indicators.to_sentence if @proposal.p_indicators %>
+        </div>
+
+        <% if @proposal.support_doc? #carrierwave method %>
+            <div class="support">
+                Additional documentation:
+                <%= link_to "Download Document #{@proposal.support_doc}", proposal_download_path(@proposal) %>
             </div>
         <% end %>
+
+        <div class="price">
+            Price range: $<%= number_with_delimiter(@proposal.min_price, delimiter: ',') %> - $<%= number_with_delimiter(@proposal.max_price, delimiter: ',') %>
+        </div>
+
+        <div class="lead_time">
+            Lead time: <%= @proposal.lead_time %> weeks
+        </div>
+
+        <div class="flight_length">
+            Flight length: <%= @proposal.flight_length %> days
+        </div>
+
+        <% if @proposal.has_attribute?(:start_date) %>
+            <div class="start_date" >
+                Start date: <%= @proposal.start_date.to_date %>
+            </div>
+        <% end %>
+
+        <div class="user">
+            Created by: <%= link_to @proposal.user.name, @proposal.user %>
+            <% if current_user?(@proposal.user) %>
+                <span class="delete">
+                    <%= link_to "Delete this proposal", @proposal, method: :delete,
+                    data: { confirm: "You sure?" } %>
+                </span>
+            <% end %>
+        </div>
+
         <div class="respond btn btn-primary">
             Respond to this proposal.
         </div>
+
     </div>
     <% if false %>
         <aside class="col-md-3">

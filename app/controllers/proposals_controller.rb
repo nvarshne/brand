@@ -9,14 +9,22 @@ class ProposalsController < ApplicationController
     @proposal = current_user.proposals.build
   end
 
+  # GET /get_indicator_options
+  def get_indicator_options
+    return if params[:objective] == nil
+    val = params[:objective]
+    options = Choices['objectives'].select{ |o| o['name'] == val }[0]['kpis']
+    render json: options
+  end
+
   # POST /proposals/
   def create
     @proposal = current_user.proposals.build(proposal_params)
+    @proposal.active = true
     if @proposal.save
       flash[:success] = "Proposal created!"
       redirect_to root_url
     else
-      @feed_items = []
       render new_proposal_path
     end
   end
@@ -26,7 +34,16 @@ class ProposalsController < ApplicationController
     @proposal = Proposal.find(params[:id])
   end
 
+  # TODO this is a rough sketch
+  def download
+    proposal = Proposal.find(params[:id])
+    return unless proposal.has_attribute?(:support_doc)
+    data = open("https://s3.amazonaws.com/#{proposal.support_doc}")
+    send_data data.read, filename: "support-#{proposal.support_doc.split('/').last}"
+  end
+
   # GET /proposals/:id/edit
+  # TODO
   def edit
   end
 
@@ -44,7 +61,24 @@ class ProposalsController < ApplicationController
   private
 
     def proposal_params
-      params.require(:proposal).permit(:summary, :site_id)
+      params.require(:proposal).permit(:site_id,
+                                       :summary,
+                                       :description,
+                                       :first_to_market,
+                                       :sponsored,
+                                       :est_reach,
+                                       :min_price,
+                                       :max_price,
+                                       :lead_time,
+                                       :flight_length,
+                                       :start_date,
+                                       :support_doc,
+                                       :integration,
+                                       :categories,
+                                       :p_objective,
+                                       :p_indicators,
+                                       :s_objective,
+                                       :s_indicators)
     end
 
     # This person is the proposal owner

@@ -5,7 +5,13 @@
             <h1>
                 <%= @site.name %>
             </h1>
-            <%= link_to @site.url, "http://#{@site.url}", target: '_blank' %>
+            <div>
+                External: <%= link_to @site.url, "http://#{@site.url}", target: '_blank' %>
+            </div>
+            <div>
+                Publisher: <%= link_to @site.publisher.name, @site.publisher %>
+            </div>
+
             <% if false %>
                 <%= link_to "Edit Site", edit_site_path(@site) %>
             <% end %>

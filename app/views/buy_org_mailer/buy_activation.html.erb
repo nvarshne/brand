@@ -1,0 +1,12 @@
+<h1>BrandVerge</h1>
+
+<p>Yo, BrandVerge Team!</p>
+
+<p>
+    We got a new buying organization that needs to be activated. Check it out, and click that link to activate.
+
+    <%= @buyorg %> TODO did that print?
+
+    <%= link_to "Activate", edit_publisher_activation_url(@buyorg.activation_token,
+                                                          name: @buyorg.name) %>
+</p>

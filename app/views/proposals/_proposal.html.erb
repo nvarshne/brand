@@ -2,8 +2,8 @@
     <%= link_to (image_tag (proposal.user.picture.url (:thumb)), class: "avatar"), proposal.user %>
     <span class="summary"><%= link_to proposal.summary, proposal %>
     </span>
-    <span class="site">website: <%= link_to proposal.site.name, proposal.site %></span>
-    <span class="publisher">publisher: <%= link_to proposal.site.publisher.name, proposal.site.publisher %></span>
+    <span class="">website: <%= link_to proposal.site.name, proposal.site %></span>
+    <% if false %><span class="publisher">publisher: <%= link_to proposal.site.publisher.name, proposal.site.publisher %></span><% end %>
     <span class="timestamp">
         Posted <%= time_ago_in_words(proposal.created_at) %> ago by
         <%= link_to proposal.user.name, proposal.user %>

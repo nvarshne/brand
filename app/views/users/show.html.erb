@@ -13,10 +13,14 @@
             <% end %>
             <%= link_to "Edit Profile", edit_user_path(@user) %>
         </section>
+    <% if current_user.admin? && !current_user?(user) %>
+        | <%= link_to "delete", user, method: :delete,
+          data: { confirm: "You sure?" } %>
+    <% end %>
     </aside>
     <div class="col-md-8">
         <% if @user.proposals.any? %>
-            <h3>Proposals (<%= @user.proposals.count %>)</h3>
+            <h3>Proposals</h3>
             <ol class="proposals">
                 <%= render @proposals %>
             </ol>

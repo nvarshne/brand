@@ -1,15 +1,52 @@
-<% provide(:title, 'New Proposal') %>
+<% provide(:title, 'New Proposal Submission Form') %>
 <h1><%= yield(:title) %></h1>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <%= simple_form_for(@proposal) do |f| %>
+    <div class="col-md-6 co-md-offset-3">
+        <%= simple_form_for(@proposal, html: {multipart: true}) do |f| %>
             <%= render 'shared/error_messages', object: f.object %>
-
-            <%= f.input :summary %>
-            <%= f.input :site_id, collection: @proposal.user.publisher.sites %>
-
+            <%= f.association :site, collection: @proposal.user.publisher.sites, input_html: {style: 'width: 200px'} %>
+            <%= f.input :summary , label: "Summary/Title"%>
+            <%= f.input :description, label: "Optional: Further Description", as: :text, input_html: { rows: "6" }  %>
+            <%= f.input :first_to_market, as: :radio_buttons, label: "Is this proposal a first-to-market opportunity?" %>
+            <%= f.input :lead_time, label: "Lead Time (weeks)" %>
+            <%= f.input :flight_length, label: "Flight Length (days)" %>
+            <%= f.input :start_date, as: :date, order: [:month, :day, :year], label: "Optional: Estimated Flight Date" %>
+            <%= f.input :est_reach, label: "Estimated Audience Size", input_html: {style: 'width: 150px'} %>
+            <label style="display:block">Price range For Interested Buyers</label>
+            <%= f.input :min_price, label: false, wrapper_html: {style: 'display:inline-block'}, input_html: {style: 'width: 150px'} %>
+            - <!---->
+            <%= f.input :max_price, label: false, wrapper_html: {style: 'display:inline-block'}, input_html: {style: 'width: 150px'} %>
+            <span class="upload">
+                <%= f.input :support_doc, as: :file, accept: "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*", label: "Additional Support Documentation (PDF, Word, Excel, Powerpoint)" %>
+            </span>
+            <%= f.input :integration, label: "Content integration", collection: Choices['integration'], as: :radio_buttons %>
+            <%= f.input :types, label: "Proposal Type(s)", collection: Choices['types'], input_html: { class: 'chosen-select', multiple: true } %>
+            <%= f.input :p_objective, label: "Primary Objective", collection: Choices['objectives'].map { |li| li['name'] } %>
+            <%= f.input :p_indicators, label: "Primary Indicators", collection: ["First, pick an objective"], input_html: { class: 'chosen-select', multiple: true } %>
+            <%= f.input :sponsored, as: :radio_buttons, label: "Would you like this proposal to be sponsored?" %>
             <%= f.button :submit, "Submit proposal", class: "btn btn-primary" %>
         <% end %>
+
+        <script type="text/javascript">
+         $("#proposal_p_objective").change(function(){
+             var obj = $(this).val()
+             var url = '/get_indicator_options?objective=' + obj
+             $("#proposal_p_indicators").empty()
+             $.get(url, function(data) {
+                 $("label[for='proposal_p_indicators']").text("Primary Indicators for " + obj);
+                 for (var i = 0; i < data.length; i++){
+                     $("#proposal_p_indicators").append("<option value='" +data[i]+ "'>" +data[i]+ "     </option>");
+                 }
+                 $('#proposal_p_indicators').trigger("chosen:updated");
+             });
+         });
+         $('#proposal_support_doc').bind('change', function() {
+             var size_in_megabytes = this.files[0].size/1024/1024;
+             if (size_in_megabytes > 10) {
+                 alert('Maximum file size is 10MB. Please choose a smaller file.');
+             }
+         });
+        </script>
     </div>
 </div>

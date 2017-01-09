@@ -18,6 +18,7 @@ User.create!(name:  "Example Admin",
              password_confirmation: password,
              activated: true,
              activated_at: Time.zone.now,
+             time_zone: "Eastern Time (US & Canada)",
              admin: true)
 
 User.create!(name: "Example Lead",
@@ -26,6 +27,7 @@ User.create!(name: "Example Lead",
              password_confirmation: password,
              activated: true,
              activated_at: Time.zone.now,
+             time_zone: "Eastern Time (US & Canada)",
              picture: 'pic.jpg',
              publisher: publisher1,
              lead: true)
@@ -37,6 +39,7 @@ User.create!(name: "Example Team Member",
              password_confirmation: password,
              activated: true,
              activated_at: Time.zone.now,
+             time_zone: "Eastern Time (US & Canada)",
              publisher: publisher1)
 
 99.times do |n|
@@ -50,11 +53,24 @@ User.create!(name: "Example Team Member",
                password_confirmation: password,
                activated: true,
                activated_at: Time.zone.now,
+               time_zone: "Eastern Time (US & Canada)",
                publisher: publisher1)
 end
 
 users = User.where(admin: false).order(:created_at).take(6)
 50.times do
   summary = Faker::Lorem.sentence(5)
-  users.each { |user| user.proposals.create!(summary: summary, site: site1) }
+  users.each { |user| user.proposals.create!(summary: summary,
+                                             site: site1,
+                                             integration: 'Custom',
+                                             types: ['Photo Gallery', 'Product Gallery'],
+                                             categories: ['Lifestyle', 'Music', 'News'],
+                                             p_objective: 'Awareness',
+                                             p_indicators: ['Reach', 'Impressions', 'Video Views'],
+                                             min_price: 0,
+                                             max_price: 10,
+                                             est_reach: 999999,
+                                             start_date: Time.zone.now.advance(weeks: 5),
+                                             lead_time: 3,
+                                             flight_length: 7)}
 end

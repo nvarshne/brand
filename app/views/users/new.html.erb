@@ -9,9 +9,9 @@
             <%= f.input :email %>
             <%= f.input :password %>
             <%= f.input :password_confirmation %>
-            <%= f.input :time_zone, priority: /US/, selected: nil %>
-            <span class="picture">
-                <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+            <%= f.input :time_zone, priority: /US/ %>
+            <span class="upload">
+                <%= f.input :picture, as: :file, accept: 'image/jpeg,image/gif,image/png' %>
             </span>
             <%= f.button :submit, "Create my account", class: "btn btn-primary" %>
         <% end %>

@@ -1,0 +1,8 @@
+Yo, BrandVerge!
+
+We got a new buying organization that needs to be activated. Check it out, and click that link to activate.
+
+<%= @buyorg.to_s %>
+
+<%= edit_publisher_activation_url(@buyorg.activation_token,
+                                  name: @buyorg.name) %>

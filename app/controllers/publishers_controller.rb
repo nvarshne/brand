@@ -10,6 +10,9 @@ class PublishersController < ApplicationController
     @publisher = Publisher.new
     @publisher.users.build
     @publisher.sites.build
+    @buyorg = BuyOrg.new
+    @buyorg.users.build
+    @buyorg.brands.build
   end
 
   # POST /publishers/
@@ -34,6 +37,7 @@ class PublishersController < ApplicationController
   def show
     @publisher = Publisher.find(params[:id])
     @proposals = @publisher.proposals.paginate(page: params[:page], per_page: 15)
+    @users = @publisher.users
   end
 
   # GET /publishers/:id/edit/

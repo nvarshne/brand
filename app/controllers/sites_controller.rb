@@ -17,8 +17,7 @@ class SitesController < ApplicationController
     @proposals = @site.proposals.paginate(page: params[:page], per_page: 15)
   end
 
-  # TODO only sites from activated publishers
   def index
-    @sites = Site.all.paginate(page: params[:page], per_page: 15)
+    @sites = Site.where(activated: true).paginate(page: params[:page], per_page: 15)
   end
 end

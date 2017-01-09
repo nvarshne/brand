@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   belongs_to :publisher, optional: true
+  belongs_to :buy_org, optional: true
   has_many   :proposals, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token #virtual fields.
   mount_uploader :picture, PictureUploader
@@ -104,9 +105,9 @@ class User < ApplicationRecord
 
   private
 
-    def downcase_email
-      self.email = email.downcase
-    end
+  def downcase_email
+    self.email = email.downcase
+  end
 
     def create_activation_digest
       self.activation_token  = User.new_token

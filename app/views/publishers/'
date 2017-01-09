@@ -1,0 +1,10 @@
+<div class="nested-fields">
+    <%= f.input :name, label: "Full Name" %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation, label: "Confirmation" %>
+    <span class="upload">
+        <%= f.input :profile_picture, as: :file, accept: 'image/jpeg,image/gif,image/png' %>
+    </span>
+    <%= link_to_remove_association "remove this user", f %>
+</div>

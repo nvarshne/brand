@@ -1,42 +1,76 @@
-<% provide(:title, 'Register') %>
-<h1><%= yield(:title) %></h1>
+<div id="org-prompt">
+  <h1> Register </h1>
+  <div class="row">
+    <p> Are you a buyer or a seller of advertising space? </p>
+    <button class="btn btn-default" id="buyer-btn"> I am a buyer </button>
+    <button class="btn btn-default" id="seller-btn"> I am a seller </button>
+  </div>
+</div>
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <%= form_for(@publisher) do |f| %>
-            <%= render 'shared/error_messages', object: f.object %>
-
-            <h2> Organization </h2>
-
-            <%= f.label :name %>
-            <%= f.text_field :name, class: 'form-control' %>
-
-            <br />
-            <%= f.fields_for :users do |builder| %>
-                <h2> You: Team Lead </h2>
-                <%= builder.label :name, "Full Name" %>
-                <%= builder.text_field :name, class: 'form-control' %>
-
-                <%= builder.label :email %>
-                <%= builder.email_field :email, class: 'form-control' %>
-
-                <%= builder.label :password %>
-                <%= builder.password_field :password, class: 'form-control' %>
-
-                <%= builder.label :password_confirmation, "Confirmation" %>
-                <%= builder.password_field :password_confirmation, class: 'form-control' %>
-            <% end %>
-
-            <%= f.fields_for :sites do |builder| %>
-                <h2> Websites: The Locations Of Your Publisher's Content </h2>
-                <%= builder.label :name, "Website Name" %>
-                <%= builder.text_field :name, class: 'form-control' %>
-
-                <%= builder.label :URL %>
-                <%= builder.text_field :url, class: 'form-control' %>
-
-            <% end %>
-            <%= f.submit "Register Organization", class: "btn btn-primary" %>
-        <% end %>
+<div class="col-md-6 col-md-offset-3" id="seller-form">
+  <h1> Selling Registration </h1>
+  <%= simple_form_for(@publisher) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <h2> Publishing Organization </h2>
+    <%= f.input :name, label: "Publishing Organization Name" %>
+    <br /><h2> Your Personal Account: Team Lead </h2>
+    <%= f.simple_fields_for :users do |user| %>
+      <%= render 'user_fields', f: user %>
+      <div class="links">
+        <%= link_to_add_association 'add another lead user', f, :users %>
+      </div>
+    <% end %>
+    <h2> Websites Associated with this Publisher </h2>
+    <div id="sites">
+      <%= f.simple_fields_for :sites do |site| %>
+        <%= render 'site_fields', f: site %>
+        <div class="links">
+          <%= link_to_add_association 'add site', f, :sites %>
+        </div>
+      <% end %>
     </div>
+    <%= f.button :submit, "Register Organization", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<div class="col-md-6 col-md-offset-3" id="buyer-form">
+  <h1> Buying Registration </h1>
+  <%= simple_form_for(@buyorg) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <h2> Buying Organization </h2>
+    <%= f.input :name, label: "Buying Organization Name" %>
+    <br /><h2> Your Personal Account: Team Lead </h2>
+    <%= f.simple_fields_for :users do |user| %>
+      <%= render 'user_fields', f: user %>
+      <div class="links">
+        <%= link_to_add_association 'add another lead user', f, :users %>
+      </div>
+    <% end %>
+    <h2> Brands Associated with Your Organization </h2>
+    <div id="brands">
+      <%= f.simple_fields_for :brands do |brand| %>
+        <%= render 'brand_fields', f: brand %>
+        <div class="links">
+          <%= link_to_add_association 'add brand', f, :brands%>
+        </div>
+      <% end %>
+    </div>
+    <%= f.button :submit, "Register Organization", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+   $('#seller-form').hide();
+   $('#buyer-form').hide();
+   $('#seller-btn').click(function() {
+     $('#seller-form').toggle();
+     $('#org-prompt').toggle();
+   });
+   $('#buyer-btn').click(function() {
+     $('#buyer-form').toggle();
+     $('#org-prompt').toggle();
+   });
+ });
+</script>
 </div>

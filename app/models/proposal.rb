@@ -23,6 +23,11 @@ class Proposal < ApplicationRecord
   serialize :categories
   serialize :p_indicators
 
+  scope :publisher, -> (publisher_id) { where publisher_id: publisher_id }
+  scope :site, -> (site_id) { where site_id: site_id }
+  scope :categories, -> (categories) { where categories: categories }
+  scope :starts_with, -> (summary) { where("summary like ?", "#{summary}%")}
+
   private
 
   def support_doc_size

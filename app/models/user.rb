@@ -78,6 +78,10 @@ class User < ApplicationRecord
     self.publisher_id
   end
 
+  def buyer?
+    self.buy_org_id
+  end
+
   def check_invitation
     if admin?
       return

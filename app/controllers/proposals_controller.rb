@@ -2,7 +2,15 @@ class ProposalsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :show, :destroy]
   before_action :seller_user,    only: [:new, :create, :show]
   before_action :correct_user,   only: :destroy
-  before_action :admin_user,          only: :index
+  before_action :buyer_user,     only: :index
+
+  def index
+    @proposals = Proposal.where(nil)
+    @proposals = @proposals.publisher(params[:publisher_id]) if params[:status].present?
+    @proposals = @proposals.site(params[:site_id]) if params[:location].present?
+    @proposals = @proposals.categories(params[:categories]) if params[:categories].present?
+    @proposals = @proposals.(params[:starts_with]) if params[:starts_with].present?
+  end
 
   # GET /proposals/new/
   def new
@@ -60,30 +68,30 @@ class ProposalsController < ApplicationController
 
   private
 
-    def proposal_params
-      params.require(:proposal).permit(:site_id,
-                                       :summary,
-                                       :description,
-                                       :first_to_market,
-                                       :sponsored,
-                                       :est_reach,
-                                       :min_price,
-                                       :max_price,
-                                       :lead_time,
-                                       :flight_length,
-                                       :start_date,
-                                       :support_doc,
-                                       :integration,
-                                       :categories,
-                                       :p_objective,
-                                       :p_indicators,
-                                       :s_objective,
-                                       :s_indicators)
-    end
+  def proposal_params
+    params.require(:proposal).permit(:site_id,
+                                     :summary,
+                                     :description,
+                                     :first_to_market,
+                                     :sponsored,
+                                     :est_reach,
+                                     :min_price,
+                                     :max_price,
+                                     :lead_time,
+                                     :flight_length,
+                                     :start_date,
+                                     :support_doc,
+                                     :integration,
+                                     :categories,
+                                     :p_objective,
+                                     :p_indicators,
+                                     :s_objective,
+                                     :s_indicators)
+  end
 
-    # This person is the proposal owner
-    def correct_user
-      @proposal = current_user.proposals.find_by(id: params[:id])
-      redirect_to root_url if @proposal.nil?
-    end
+  # This person is the proposal owner
+  def correct_user
+    @proposal = current_user.proposals.find_by(id: params[:id])
+    redirect_to root_url if @proposal.nil?
+  end
 end

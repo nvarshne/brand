@@ -22,7 +22,13 @@ class ApplicationController < ActionController::Base
     end
 
     def seller_user
-      if !current_user.seller?
+      if !current_user.seller? || !current_user.admin?
+        redirect_to root_url
+      end
+    end
+
+    def buyer_user
+      if !current_user.buyer? || !current_user.admin?
         redirect_to root_url
       end
     end
